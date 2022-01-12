@@ -30,8 +30,9 @@ export class ProdutosController {
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async updateProduto(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() produto: Produtos) {
     try {
-      const produtos = await this.libraryService.updateProduto(id, produto);
-      return response.status(HttpStatus.OK).json([{ message: 'Produto atualizado com sucesso' }]);
+      const updateOne = await this.libraryService.updateProduto(id, produto);
+      const updateResponse = updateOne.affected ? { message: 'Produto atualizado com sucesso' } : { message: "Produto não encontrado" };
+      return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,
@@ -58,7 +59,8 @@ export class ProdutosController {
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const produto = await this.libraryService.findOne(id);
+      const produtos = await this.libraryService.findOne(id);
+      const produto = produtos || {message: "Produto não encontrado"};
       return response.status(HttpStatus.OK).json(produto);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -72,8 +74,9 @@ export class ProdutosController {
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const produto = await this.libraryService.deleteOne(id);
-      return response.status(HttpStatus.OK).json([{ message: 'Produto deletado com sucesso' }]);
+      const deleteOne = await this.libraryService.deleteOne(id);
+      const produto = deleteOne.affected ? { message: 'Produto deletado com sucesso' } : { message: "Produto não encontrado" };
+      return response.status(HttpStatus.OK).json(produto);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,

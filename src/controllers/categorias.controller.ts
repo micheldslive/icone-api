@@ -30,8 +30,9 @@ export class CategoriasController {
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async updateCategoria(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() categoria: Categorias) {
     try {
-      const categorias = await this.libraryService.updateCategoria(id, categoria);
-      return response.status(HttpStatus.OK).json([{ message: 'Categoria atualizada com sucesso' }]);
+      const updateOne = await this.libraryService.updateCategoria(id, categoria);
+      const updateResponse = updateOne.affected ? { message: 'Categoria atualizada com sucesso' } : { message: "Categoria não encontrada" };
+      return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,
@@ -58,7 +59,8 @@ export class CategoriasController {
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const categoria = await this.libraryService.findOne(id);
+      const categorias = await this.libraryService.findOne(id);
+      const categoria = categorias || {message: "Categoria não encontrada"};
       return response.status(HttpStatus.OK).json(categoria);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -72,8 +74,9 @@ export class CategoriasController {
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const categoria = await this.libraryService.deleteOne(id);
-      return response.status(HttpStatus.OK).json([{ message: 'Categoria deletada com sucesso' }]);
+      const deleteOne = await this.libraryService.deleteOne(id);
+      const categoria = deleteOne.affected ? { message: 'Categoria deletado com sucesso' } : { message: "Categoria não encontrada" };
+      return response.status(HttpStatus.OK).json(categoria);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,

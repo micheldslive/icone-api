@@ -30,8 +30,9 @@ export class ImagensController {
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async updateImagem(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() imagem: Imagens) {
     try {
-      const imagens = await this.libraryService.updateImagem(id, imagem);
-      return response.status(HttpStatus.OK).json([{ message: 'Imagem atualizada com sucesso' }]);
+      const updateOne = await this.libraryService.updateImagem(id, imagem);
+      const updateResponse = updateOne.affected ? { message: 'Imagem atualizado com sucesso' } : { message: "Imagem não encontrado" };
+      return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,
@@ -58,7 +59,8 @@ export class ImagensController {
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const imagem = await this.libraryService.findOne(id);
+      const imagens = await this.libraryService.findOne(id);
+      const imagem = imagens || {message: "Imagem não encontrada"};
       return response.status(HttpStatus.OK).json(imagem);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -72,8 +74,9 @@ export class ImagensController {
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const imagem = await this.libraryService.deleteOne(id);
-      return response.status(HttpStatus.OK).json([{ message: 'Imagem deletada com sucesso' }]);
+      const deleteOne = await this.libraryService.deleteOne(id);
+      const imagem = deleteOne.affected ? { message: 'Imagem deletada com sucesso' } : { message: "Imagem não encontrada" };
+      return response.status(HttpStatus.OK).json(imagem);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,

@@ -30,8 +30,9 @@ export class FavoritosController {
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async updateFavorito(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() favorito: Favoritos) {
     try {
-      const favoritos = await this.libraryService.updateFavorito(id, favorito);
-      return response.status(HttpStatus.OK).json([{ message: 'Favorito atualizado com sucesso' }]);
+      const updateOne = await this.libraryService.updateFavorito(id, favorito);
+      const updateResponse = updateOne.affected ? { message: 'Favorito atualizado com sucesso' } : { message: "Favorito não encontrado" };
+      return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,
@@ -58,7 +59,8 @@ export class FavoritosController {
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const favorito = await this.libraryService.findOne(id);
+      const favoritos = await this.libraryService.findOne(id);
+      const favorito = favoritos || {message: "Favorito não encontrado"};
       return response.status(HttpStatus.OK).json(favorito);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -72,8 +74,9 @@ export class FavoritosController {
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
-      const favorito = await this.libraryService.deleteOne(id);
-      return response.status(HttpStatus.OK).json([{ message: 'Favorito deletado com sucesso' }]);
+      const deleteOne = await this.libraryService.deleteOne(id);
+      const favorito = deleteOne.affected ? { message: 'Favorito deletado com sucesso' } : { message: "Favorito não encontrado" };
+      return response.status(HttpStatus.OK).json(favorito);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
         message: `Erro inesperado no servidor! ${error}`,
