@@ -5,7 +5,7 @@ import { Favoritos } from 'src/entities/favoritos.entity';
 import { Categorias } from 'src/entities/categorias.entity';
 import { Imagens } from 'src/entities/imagens.entity';
 
-const HOST = process.env.HOST || 'database';
+const HOST = process.env.HOST || 'icone-db';
 const USER = process.env.USER || 'root';
 const PASS = process.env.PASS || 'icone123';
 const DATA = process.env.DATA || 'icone';
