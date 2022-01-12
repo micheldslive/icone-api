@@ -1,0 +1,34 @@
+version: '3'
+services:
+  icone-db:
+    image: mysql
+    container_name: 'icone-db'
+    command: --default-authentication-plugin=mysql_native_password
+    restart: 'always'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    networks:
+      - backend
+    environment:
+      MYSQL_USER: 'icone'
+      MYSQL_ROOT_PASSWORD: 'icone123'
+      MYSQL_DATABASE: 'icone'
+  icone-api:
+    image: node:alpine
+    container_name: 'icone-api'
+    ports:
+      - '4000:4000'
+    expose:
+      - '4000'
+    working_dir: '/icone/app'
+    volumes:
+      - .:/icone/app
+    command: 'npm start'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: 'bridge'
