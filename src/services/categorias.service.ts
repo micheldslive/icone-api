@@ -18,8 +18,8 @@ export class CategoriasService {
     return this.categoriasRepository.findOne(id);
   }
 
-  createCategoria(categorias: Categorias): Promise<Categorias> {
-    return this.categoriasRepository.save(categorias);
+  createCategoria(categoria: Categorias): Promise<Categorias> {
+    return this.categoriasRepository.save(categoria);
   }
 
   updateCategoria(id: string, categoria: Categorias): Promise<any> {

@@ -22,15 +22,15 @@ export class Produtos {
   @ApiProperty()
   preco_old: number;
 
-  @Column()
+  @Column({ select: false })
   @ApiProperty()
   id_categoria: string;
 
-  @Column('varchar', { length: 100 })
+  @Column()
   @ApiProperty()
   marca: string;
 
-  @Column('varchar', { length: 100 })
+  @Column()
   @ApiProperty()
   condicao: string;
 
@@ -38,15 +38,15 @@ export class Produtos {
   @ApiProperty()
   desc: string;
 
-  @Column('int', { default: () => "'0'" })
+  @Column({ default: () => "'0'" })
   @ApiProperty()
   disponivel: number;
 
-  @Column('int', { default: () => "'0'" })
+  @Column({ default: () => "'0'" })
   @ApiProperty()
   estoque: number;
 
-  @Column('int', { default: () => "'0'" })
+  @Column({ default: () => "'0'" })
   @ApiProperty()
   total: number;
 

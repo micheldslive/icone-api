@@ -9,11 +9,11 @@ export class Favoritos {
   @ApiProperty({description: "column using uuid generator"})
   id_favorito: string;
 
-  @Column()
+  @Column({ select: false })
   @ApiProperty()
   id_cliente: string;
 
-  @Column()
+  @Column({ select: false })
   @ApiProperty()
   id_produto: string;
 

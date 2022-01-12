@@ -18,12 +18,12 @@ export class ClientesService {
     return this.clientesRepository.findOne(id);
   }
 
-  createCliente(clientes: Clientes): Promise<Clientes> {
-    return this.clientesRepository.save(clientes);
+  createCliente(cliente: Clientes): Promise<Clientes> {
+    return this.clientesRepository.save(cliente);
   }
 
-  updateCliente(id: string, especialidade: Clientes): Promise<any> {
-    return this.clientesRepository.update(id, especialidade);
+  updateCliente(id: string, cliente: Clientes): Promise<any> {
+    return this.clientesRepository.update(id, cliente);
   }
 
   deleteOne(id: string) {

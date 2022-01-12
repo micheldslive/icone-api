@@ -7,28 +7,30 @@ import { Favoritos } from 'src/entities/favoritos.entity';
 export class FavoritosService {
   constructor(
     @InjectRepository(Favoritos)
-    private medicosRepository: Repository<Favoritos>,
+    private favoritosRepository: Repository<Favoritos>,
   ) {}
 
   findAll(): Promise<Favoritos[]> {
-    return this.medicosRepository.find({
-      relations: ['especialidades'],
+    return this.favoritosRepository.find({
+      relations: ['cliente', 'produto'],
     });
   }
 
   findOne(id: string): Promise<Favoritos> {
-    return this.medicosRepository.findOne(id);
+    return this.favoritosRepository.findOne(id, {
+      relations: ['cliente', 'produto'],
+    });
   }
 
-  createFavorito(medicos: Favoritos): Promise<Favoritos> {
-    return this.medicosRepository.save(medicos);
+  createFavorito(favorito: Favoritos): Promise<Favoritos> {
+    return this.favoritosRepository.save(favorito);
   }
 
-  updateFavorito(id: string, especialidade: Favoritos): Promise<any> {
-    return this.medicosRepository.update(id, especialidade);
+  updateFavorito(id: string, favorito: Favoritos): Promise<any> {
+    return this.favoritosRepository.update(id, favorito);
   }
 
   deleteOne(id: string) {
-    return this.medicosRepository.delete(id);
+    return this.favoritosRepository.delete(id);
   }
 }

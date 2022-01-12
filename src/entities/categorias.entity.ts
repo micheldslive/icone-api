@@ -2,13 +2,13 @@ import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from 't
 import { ApiProperty } from '@nestjs/swagger';
 import { Produtos } from './produtos.entity';
 
-@Entity('tb_categorias', { schema: 'icone' })
+@Entity('tb_categorias')
 export class Categorias {
   @PrimaryGeneratedColumn('uuid', { name: 'id_categoria' })
   @ApiProperty({description: "column using uuid generator"})
   id_categoria: string;
 
-  @Column('varchar', { name: 'categoria', length: 100, default: () => "''" })
+  @Column()
   @ApiProperty()
   categoria: string;
 

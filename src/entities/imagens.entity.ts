@@ -8,11 +8,11 @@ export class Imagens {
   @ApiProperty({description: "column using uuid generator"})
   id_img: string;
 
-  @Column('varchar', { name: 'url', length: 100 })
+  @Column()
   @ApiProperty()
   url: string;
 
-  @Column()
+  @Column({ select: false })
   @ApiProperty()
   id_produto: string;
 

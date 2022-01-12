@@ -7,28 +7,30 @@ import { Produtos } from 'src/entities/produtos.entity';
 export class ProdutosService {
   constructor(
     @InjectRepository(Produtos)
-    private medicosRepository: Repository<Produtos>,
+    private produtosRepository: Repository<Produtos>,
   ) {}
 
   findAll(): Promise<Produtos[]> {
-    return this.medicosRepository.find({
-      relations: ['imagens'],
+    return this.produtosRepository.find({
+      relations: ['categoria','imagens'],
     });
   }
 
   findOne(id: string): Promise<Produtos> {
-    return this.medicosRepository.findOne(id);
+    return this.produtosRepository.findOne(id, {
+      relations: ['categoria','imagens'],
+    });
   }
 
-  createProduto(medicos: Produtos): Promise<Produtos> {
-    return this.medicosRepository.save(medicos);
+  createProduto(produto: Produtos): Promise<Produtos> {
+    return this.produtosRepository.save(produto);
   }
 
-  updateProduto(id: string, especialidade: Produtos): Promise<any> {
-    return this.medicosRepository.update(id, especialidade);
+  updateProduto(id: string, produto: Produtos): Promise<any> {
+    return this.produtosRepository.update(id, produto);
   }
 
   deleteOne(id: string) {
-    return this.medicosRepository.delete(id);
+    return this.produtosRepository.delete(id);
   }
 }

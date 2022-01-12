@@ -18,12 +18,12 @@ export class ImagensService {
     return this.imagensRepository.findOne(id);
   }
 
-  createImagem(imagens: Imagens): Promise<Imagens> {
-    return this.imagensRepository.save(imagens);
+  createImagem(imagem: Imagens): Promise<Imagens> {
+    return this.imagensRepository.save(imagem);
   }
 
-  updateImagem(id: string, especialidade: Imagens): Promise<any> {
-    return this.imagensRepository.update(id, especialidade);
+  updateImagem(id: string, imagem: Imagens): Promise<any> {
+    return this.imagensRepository.update(id, imagem);
   }
 
   deleteOne(id: string) {

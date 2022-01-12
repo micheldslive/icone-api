@@ -2,33 +2,33 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Favoritos } from './favoritos.entity';
 
-@Entity('tb_clientes', { schema: 'icone' })
+@Entity('tb_clientes')
 export class Clientes {
   @PrimaryGeneratedColumn('uuid', { name: 'id_cliente' })
   @ApiProperty({description: "column using uuid generator"})
   id_cliente: string;
 
-  @Column('varchar', { name: 'nome', length: 250 })
+  @Column()
   @ApiProperty()
   nome: string;
 
-  @Column('varchar', { name: 'adress_cep', length: 8 })
+  @Column()
   @ApiProperty()
   adress_cep: string;
 
-  @Column('varchar', { name: 'address_num', nullable: true, length: 11 })
+  @Column({ nullable: true })
   @ApiPropertyOptional()
   address_num: string | null;
 
-  @Column('varchar', { name: 'cpf', length: 11 })
+  @Column()
   @ApiProperty()
   cpf: string;
 
-  @Column('varchar', { name: 'email', length: 100 })
+  @Column()
   @ApiProperty()
   email: string;
 
-  @Column('varchar', { name: 'telefone', length: 11 })
+  @Column()
   @ApiProperty()
   telefone: string;
 
@@ -36,11 +36,11 @@ export class Clientes {
   @ApiProperty()
   data_nascimento: string;
 
-  @Column('varchar', { name: 'sexo' })
+  @Column()
   @ApiProperty()
   sexo: string;
 
-  @Column('varchar', { name: 'identidade', length: 12 })
+  @Column()
   @ApiProperty()
   identidade: string;
 
