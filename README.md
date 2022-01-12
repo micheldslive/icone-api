@@ -1,6 +1,4 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# API ICONE VIRTUAL
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
@@ -36,25 +34,25 @@ In this project the following technologies, languages, and libraries were used:
   - **Yarn** - package managemen system
   - **Typescript** - for being strictly typed 
   - **typeORM** - query builder for the communication
-  - **pg** - database management system
+  - **mysql** - database management system
+  - **uuid** - id generator
   - **Swagger** - for describing the REST API
 
 # Database  
 
-The database structure was conceived after talking with the UX team about what would be displayed on the website. After some iterations, the final design is as follows.
+The database structure was conceived after talking with the UX team about what would be displayed on the website.
 
 -----
 
 ## Using typeORM  
 
-The tables were created through the node module "typeORM" using migrations to implement the necessary columns, constraints, and relations.  
+The tables were created through the node module "typeORM" using synchronize to implement the necessary columns, constraints, and relations.  
   
-The `src/app.module.ts` file holds the information to tell typeORM where to find the desired database and its type.  
-  
-The folder /migration holds the migration files, responsible for the creation and configuration of the tables.  
+The `src/coonection/index.ts` file holds the information to tell typeORM where to find the desired database and its type.
   
   
-![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")  
+![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")
+![MER print to show tables in the database](/demo/MER.jpg "Created tables")  
 
 
 ## Writing the initial information  
@@ -83,7 +81,7 @@ We used "Swagger" to create a page to showcase what is possible to do with the A
 yarn
 ```
   
-### Adjust the `src/app.module.ts` to direct to the desired database
+### Adjust the `src/connection/index.ts` to direct to the desired database
 
 ```
     {
@@ -101,7 +99,7 @@ yarn start
 
 ### Start server with hot reload
 ```
-yarn dev
+yarn start:dev
 ```
 
 ### Start server with production mode
