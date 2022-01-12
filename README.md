@@ -32,7 +32,7 @@ Criar a infraestrutura necessária para o armazenamento e coleta de dados de um 
 
 # Tecnologias implementadas 
 
-In this project the following technologies, languages, and libraries were used:
+Neste projeto foram utilizadas as seguintes tecnologias / bibliotecas:
 
 - **Nestjs**
   - **Yarn** - sistema de gerenciamento de pacotes
@@ -44,13 +44,13 @@ In this project the following technologies, languages, and libraries were used:
 
 # Banco de Dados 
 
-A estrutura do banco de dados foi concebida após conversar com a equipe de UX sobre o que seria exibido no site.
+A estrutura do banco de dados foi concebida após analisar as necessidades do cliente no descritivo teste prático.
 
 -----
 
 ## typeORM  
 
-As tabelas foram criadas através do módulo de nó "typeORM" usando `synchronize` para implementar as colunas, restrições e relações necessárias.  
+As tabelas foram criadas através do módulo de nó "typeORM" usando `synchronize` para implementar as tabelas, colunas, e relações necessárias.  
   
 O arquivo `src/connection/index.ts` armazena as informações de conexão do typeORM com o banco de dados desejado.
   
