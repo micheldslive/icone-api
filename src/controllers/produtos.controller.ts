@@ -26,7 +26,7 @@ export class ProdutosController {
 
   @Put(':id')
   @ApiBody({ type: ProdutosBody })
-  @ApiOperation({ summary: 'Atualiza produto pelo {ìd}' })
+  @ApiOperation({ summary: 'Atualiza um produto pelo {ìd}' })
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async updateProduto(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() produto: Produtos) {
     try {
@@ -57,7 +57,7 @@ export class ProdutosController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: 'Retorna produto pelo {ìd}' })
+  @ApiOperation({ summary: 'Retorna um produto pelo {ìd}' })
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
@@ -72,7 +72,7 @@ export class ProdutosController {
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: 'Deleta produto pelo {ìd}' })
+  @ApiOperation({ summary: 'Deleta um produto pelo {ìd}' })
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
