@@ -40,7 +40,6 @@ export class CategoriasController {
   }
 
   @Get()
-  @ApiBody({ type: CategoriasBody })
   @ApiOperation({ summary: "Retorna todas as categorias"})
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async fetchAll(@Res() response) {
@@ -55,7 +54,6 @@ export class CategoriasController {
   }
 
   @Get('/:id')
-  @ApiBody({ type: CategoriasBody })
   @ApiOperation({ summary: "Retorna uma categoria pelo {ìd}"})
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
