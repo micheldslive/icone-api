@@ -1,3 +1,5 @@
+# API ICONE VIRTUAL
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
@@ -36,7 +38,8 @@ In this project the following technologies, languages, and libraries were used:
   - **Yarn** - package managemen system
   - **Typescript** - for being strictly typed 
   - **typeORM** - query builder for the communication
-  - **pg** - database management system
+  - **mysql** - database management system
+  - **uuid** - id generator
   - **Swagger** - for describing the REST API
 
 # Database  
@@ -54,7 +57,8 @@ The `src/app.module.ts` file holds the information to tell typeORM where to find
 The folder /migration holds the migration files, responsible for the creation and configuration of the tables.  
   
   
-![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")  
+![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")
+![MER print to show tables in the database](/demo/MER.jpg "Created tables")  
 
 
 ## Writing the initial information  
@@ -83,7 +87,7 @@ We used "Swagger" to create a page to showcase what is possible to do with the A
 yarn
 ```
   
-### Adjust the `src/app.module.ts` to direct to the desired database
+### Adjust the `src/connection/index.ts` to direct to the desired database
 
 ```
     {
@@ -101,7 +105,7 @@ yarn start
 
 ### Start server with hot reload
 ```
-yarn dev
+yarn start:dev
 ```
 
 ### Start server with production mode
