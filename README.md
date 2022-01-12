@@ -22,51 +22,51 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-# Objective  
+# Objetivo  
 
-Create the necessary infrastructure for the storage and collection of data of a website. This includes:  
+Criar a infraestrutura necessária para o armazenamento e coleta de dados de um site. Isso inclui:
   
-- the configuration of the database with the necessary tables and relationships between them;
-- the creation of an API capable of sending, collecting, and updating data;
-- the creation of a webpage to showcase the API's capabilities.
+- configuração do banco de dados com as tabelas necessárias e relacionamentos entre elas;
+- criação de uma API capaz de enviar, coletar e atualizar dados;
+- criação de uma página web para mostrar as capacidades da API.
 
-# Tecnologies implemented  
+# Tecnologias implementadas 
 
 In this project the following technologies, languages, and libraries were used:
 
 - **Nestjs**
-  - **Yarn** - package managemen system
-  - **Typescript** - for being strictly typed 
-  - **typeORM** - query builder for the communication
-  - **mysql** - database management system
-  - **uuid** - id generator
-  - **Swagger** - for describing the REST API
+  - **Yarn** - sistema de gerenciamento de pacotes
+  - **Typescript** - por ser estritamente tipado 
+  - **typeORM** - construtor de consultas para a comunicação
+  - **mysql** - Drive para gerenciamento do banco de dados
+  - **uuid** - gerador de id timestamp
+  - **Swagger** - para descrever / documentar a API REST
 
-# Database  
+# Banco de Dados 
 
-The database structure was conceived after talking with the UX team about what would be displayed on the website.
+A estrutura do banco de dados foi concebida após conversar com a equipe de UX sobre o que seria exibido no site.
 
 -----
 
-## Using typeORM  
+## typeORM  
 
-The tables were created through the node module "typeORM" using synchronize to implement the necessary columns, constraints, and relations.  
+As tabelas foram criadas através do módulo de nó "typeORM" usando `synchronize` para implementar as colunas, restrições e relações necessárias.  
   
-The `src/coonection/index.ts` file holds the information to tell typeORM where to find the desired database and its type.
+O arquivo `src/connection/index.ts` armazena as informações de conexão do typeORM com o banco de dados desejado.
   
   
 ![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")
 ![MER print to show tables in the database](/demo/MER.jpg "Created tables")  
 
 
-## Writing the initial information  
+## Escrevendo as informações iniciais  
   
-Now we are able to input all the initial data through a single terminal command instead of needing to insert them one-by-one using the API or Postgres bank manager.  
+Agora podemos inserir todos os dados iniciais por meio de um único comando de terminal, em vez de precisar inseri-los um a um usando a API ou o gerenciador de banco mysql.  
   
   
 # API REST
 
-For the creation of the API we used the nestjs module "main.ts". With it we are able to communicate with the HTTP protocol requisitions. We separated the steps in:
+Para a criação da API foi utilizado a cli Nestjs. Com ele conseguimos nos comunicar com as requisições do protocolo HTTP.Separamos as etapas em:
 - **controllers**
 - **entities**
 - **modules**
@@ -74,19 +74,19 @@ For the creation of the API we used the nestjs module "main.ts". With it we are 
 
 ## SWAGGER
   
-We used "Swagger" to create a page to showcase what is possible to do with the API. In it it is shown which requests are possible.
+"Swagger" utilizado para criar gerar uma página mostrando o que é possível fazer com a API. Ele exibirá todos os endpoints e os métodos possíveis de usar.
 
 ![Possible requests to interact with each table](demo/swagger-requests.png?raw=true "Possible requests")
 
-# Execution  
+# Execução  
   
-### To run the application first install the modules
+### Para executar o aplicativo primeiro instale a `node_modules`:
 
 ```
 yarn
 ```
   
-### Adjust the `src/connection/index.ts` to direct to the desired database
+### Ajuste o `src/connection/index.ts` para direcionar para o banco de dados desejado:
 
 ```
     {
@@ -97,17 +97,23 @@ yarn
     },
 ```
 
-### Start server
+### Caso possua o docker instalado, utilize o comando abaixo para criar os `containers` do banco / api:
+
+```
+docker-compose up
+```
+
+### Para iniciar a api:
 ```
 yarn start
 ```
 
-### Start server with hot reload
+### Para iniciar a api com hot reload:
 ```
 yarn start:dev
 ```
 
-### Start server with production mode
+### Para iniciar a api em modo de produção:
 ```
 yarn start:prod
 ```  
