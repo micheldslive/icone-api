@@ -64,6 +64,7 @@ Now we are able to input all the initial data through a single terminal command 
 
 For the creation of the API we used the nestjs module "main.ts". With it we are able to communicate with the HTTP protocol requisitions. We separated the steps in:
 - **controllers**
+- **entities**
 - **modules**
 - **services**
 
