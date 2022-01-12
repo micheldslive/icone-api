@@ -44,17 +44,15 @@ In this project the following technologies, languages, and libraries were used:
 
 # Database  
 
-The database structure was conceived after talking with the UX team about what would be displayed on the website. After some iterations, the final design is as follows.
+The database structure was conceived after talking with the UX team about what would be displayed on the website.
 
 -----
 
 ## Using typeORM  
 
-The tables were created through the node module "typeORM" using migrations to implement the necessary columns, constraints, and relations.  
+The tables were created through the node module "typeORM" using synchronize to implement the necessary columns, constraints, and relations.  
   
-The `src/app.module.ts` file holds the information to tell typeORM where to find the desired database and its type.  
-  
-The folder /migration holds the migration files, responsible for the creation and configuration of the tables.  
+The `src/coonection/index.ts` file holds the information to tell typeORM where to find the desired database and its type.
   
   
 ![MySQL print to show created tables in the required database](/demo/DB-MySQL.png "Created tables")
