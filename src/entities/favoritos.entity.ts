@@ -1,17 +1,21 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 import { Produtos } from './produtos.entity';
 import { Clientes } from './clientes.entity';
 
 @Entity('tb_favoritos', { schema: 'icone' })
 export class Favoritos {
   @PrimaryGeneratedColumn('uuid', { name: 'id_favorito' })
-  id_favorito: number;
+  @ApiProperty({description: "column using uuid generator"})
+  id_favorito: string;
 
-  @Column('int', { name: 'id_cliente' })
-  id_cliente: number;
+  @Column()
+  @ApiProperty()
+  id_cliente: string;
 
-  @Column('int', { name: 'id_produto' })
-  id_produto: number;
+  @Column()
+  @ApiProperty()
+  id_produto: string;
 
   @ManyToOne(() => Produtos, (tbProdutos) => tbProdutos.favoritos, {
     onDelete: 'NO ACTION',

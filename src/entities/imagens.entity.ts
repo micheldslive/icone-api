@@ -1,16 +1,20 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 import { Produtos } from './produtos.entity';
 
 @Entity('tb_imagens', { schema: 'icone' })
 export class Imagens {
   @PrimaryGeneratedColumn('uuid', { name: 'id_img' })
-  id_img: number;
+  @ApiProperty({description: "column using uuid generator"})
+  id_img: string;
 
   @Column('varchar', { name: 'url', length: 100 })
+  @ApiProperty()
   url: string;
 
-  @Column('int')
-  id_produto: number;
+  @Column()
+  @ApiProperty()
+  id_produto: string;
 
   @ManyToOne(() => Produtos, (tbProdutos) => tbProdutos.imagens, {
     onDelete: 'NO ACTION',
