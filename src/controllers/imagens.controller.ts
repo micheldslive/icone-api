@@ -11,7 +11,7 @@ export class ImagensController {
 
   @Post()
   @ApiBody({ type: ImagensBody })
-  @ApiOperation({ summary: "Cria um novo registro de imagem" })
+  @ApiOperation({ summary: 'Cria um novo registro de imagem' })
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async createImagem(@Res() response, @Body() imagem: Imagens) {
     try {
@@ -26,12 +26,14 @@ export class ImagensController {
 
   @Put(':id')
   @ApiBody({ type: ImagensBody })
-  @ApiOperation({ summary: "Atualiza imagem pelo {ìd}" })
+  @ApiOperation({ summary: 'Atualiza imagem pelo {ìd}' })
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async updateImagem(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() imagem: Imagens) {
     try {
       const updateOne = await this.libraryService.updateImagem(id, imagem);
-      const updateResponse = updateOne.affected ? { message: 'Imagem atualizado com sucesso' } : { message: "Imagem não encontrado" };
+      const updateResponse = updateOne.affected
+        ? { message: 'Imagem atualizado com sucesso' }
+        : { message: 'Imagem não encontrado' };
       return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -41,7 +43,7 @@ export class ImagensController {
   }
 
   @Get()
-  @ApiOperation({ summary: "Retorna todas as imagens" })
+  @ApiOperation({ summary: 'Retorna todas as imagens' })
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async fetchAll(@Res() response) {
     try {
@@ -55,12 +57,12 @@ export class ImagensController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: "Retorna imagem pelo {ìd}" })
+  @ApiOperation({ summary: 'Retorna imagem pelo {ìd}' })
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const imagens = await this.libraryService.findOne(id);
-      const imagem = imagens || {message: "Imagem não encontrada"};
+      const imagem = imagens || { message: 'Imagem não encontrada' };
       return response.status(HttpStatus.OK).json(imagem);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -70,12 +72,14 @@ export class ImagensController {
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: "Deleta imagem pelo {ìd}" })
+  @ApiOperation({ summary: 'Deleta imagem pelo {ìd}' })
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const deleteOne = await this.libraryService.deleteOne(id);
-      const imagem = deleteOne.affected ? { message: 'Imagem deletada com sucesso' } : { message: "Imagem não encontrada" };
+      const imagem = deleteOne.affected
+        ? { message: 'Imagem deletada com sucesso' }
+        : { message: 'Imagem não encontrada' };
       return response.status(HttpStatus.OK).json(imagem);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({

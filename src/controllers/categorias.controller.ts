@@ -11,7 +11,7 @@ export class CategoriasController {
 
   @Post()
   @ApiBody({ type: CategoriasBody })
-  @ApiOperation({ summary: "Cria um novo registro de categoria" })
+  @ApiOperation({ summary: 'Cria um novo registro de categoria' })
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async createCategoria(@Res() response, @Body() categoria: Categorias) {
     try {
@@ -26,12 +26,14 @@ export class CategoriasController {
 
   @Put(':id')
   @ApiBody({ type: CategoriasBody })
-  @ApiOperation({ summary: "Atualiza uma categoria pelo {ìd}" })
+  @ApiOperation({ summary: 'Atualiza uma categoria pelo {ìd}' })
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async updateCategoria(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() categoria: Categorias) {
     try {
       const updateOne = await this.libraryService.updateCategoria(id, categoria);
-      const updateResponse = updateOne.affected ? { message: 'Categoria atualizada com sucesso' } : { message: "Categoria não encontrada" };
+      const updateResponse = updateOne.affected
+        ? { message: 'Categoria atualizada com sucesso' }
+        : { message: 'Categoria não encontrada' };
       return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -41,7 +43,7 @@ export class CategoriasController {
   }
 
   @Get()
-  @ApiOperation({ summary: "Retorna todas as categorias" })
+  @ApiOperation({ summary: 'Retorna todas as categorias' })
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async fetchAll(@Res() response) {
     try {
@@ -55,12 +57,12 @@ export class CategoriasController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: "Retorna uma categoria pelo {ìd}" })
+  @ApiOperation({ summary: 'Retorna uma categoria pelo {ìd}' })
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const categorias = await this.libraryService.findOne(id);
-      const categoria = categorias || {message: "Categoria não encontrada"};
+      const categoria = categorias || { message: 'Categoria não encontrada' };
       return response.status(HttpStatus.OK).json(categoria);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -70,12 +72,14 @@ export class CategoriasController {
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: "Deleta uma categoria pelo {ìd}" })
+  @ApiOperation({ summary: 'Deleta uma categoria pelo {ìd}' })
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const deleteOne = await this.libraryService.deleteOne(id);
-      const categoria = deleteOne.affected ? { message: 'Categoria deletado com sucesso' } : { message: "Categoria não encontrada" };
+      const categoria = deleteOne.affected
+        ? { message: 'Categoria deletado com sucesso' }
+        : { message: 'Categoria não encontrada' };
       return response.status(HttpStatus.OK).json(categoria);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({

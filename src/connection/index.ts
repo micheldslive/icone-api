@@ -1,4 +1,4 @@
-import { ConnectionProps } from "./types";
+import { ConnectionProps } from './types';
 import { Produtos } from 'src/entities/produtos.entity';
 import { Clientes } from 'src/entities/clientes.entity';
 import { Favoritos } from 'src/entities/favoritos.entity';

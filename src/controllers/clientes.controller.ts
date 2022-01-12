@@ -11,7 +11,7 @@ export class ClientesController {
 
   @Post()
   @ApiBody({ type: ClientesBody })
-  @ApiOperation({ summary: "Cria um novo registro de cliente" })
+  @ApiOperation({ summary: 'Cria um novo registro de cliente' })
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async createCliente(@Res() response, @Body() cliente: Clientes) {
     try {
@@ -26,12 +26,14 @@ export class ClientesController {
 
   @Put(':id')
   @ApiBody({ type: ClientesBody })
-  @ApiOperation({ summary: "Atualiza um cliente pelo {ìd}" })
+  @ApiOperation({ summary: 'Atualiza um cliente pelo {ìd}' })
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async updateCliente(@Res() response, @Param('id', new ParseUUIDPipe()) id: string, @Body() cliente: Clientes) {
     try {
       const updateOne = await this.libraryService.updateCliente(id, cliente);
-      const updateResponse = updateOne.affected ? { message: 'Cliente atualizado com sucesso' } : { message: "Cliente não encontrado" };
+      const updateResponse = updateOne.affected
+        ? { message: 'Cliente atualizado com sucesso' }
+        : { message: 'Cliente não encontrado' };
       return response.status(HttpStatus.OK).json(updateResponse);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -41,7 +43,7 @@ export class ClientesController {
   }
 
   @Get()
-  @ApiOperation({ summary: "Retorna todos os clientes" })
+  @ApiOperation({ summary: 'Retorna todos os clientes' })
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async fetchAll(@Res() response) {
     try {
@@ -55,12 +57,12 @@ export class ClientesController {
   }
 
   @Get('/:id')
-  @ApiOperation({ summary: "Retorna um cliente pelo {ìd}" })
+  @ApiOperation({ summary: 'Retorna um cliente pelo {ìd}' })
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const clientes = await this.libraryService.findOne(id);
-      const cliente = clientes || {message: "Cliente não encontrado"};
+      const cliente = clientes || { message: 'Cliente não encontrado' };
       return response.status(HttpStatus.OK).json(cliente);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
@@ -70,12 +72,14 @@ export class ClientesController {
   }
 
   @Delete('/:id')
-  @ApiOperation({ summary: "Deleta um cliente pelo {ìd}" })
+  @ApiOperation({ summary: 'Deleta um cliente pelo {ìd}' })
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
     try {
       const deleteOne = await this.libraryService.deleteOne(id);
-      const cliente = deleteOne.affected ? { message: 'Cliente deletado com sucesso' } : { message: "Cliente não encontrado" };
+      const cliente = deleteOne.affected
+        ? { message: 'Cliente deletado com sucesso' }
+        : { message: 'Cliente não encontrado' };
       return response.status(HttpStatus.OK).json(cliente);
     } catch (error) {
       return response.status(HttpStatus.FORBIDDEN).json({
