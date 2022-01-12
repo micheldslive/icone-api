@@ -40,7 +40,6 @@ export class FavoritosController {
   }
 
   @Get()
-  @ApiBody({ type: FavoritosBody })
   @ApiOperation({ summary: "Retorna todos os favoritos"})
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async fetchAll(@Res() response) {
@@ -55,7 +54,6 @@ export class FavoritosController {
   }
 
   @Get('/:id')
-  @ApiBody({ type: FavoritosBody })
   @ApiOperation({ summary: "Retorna um favorito pelo {ìd}"})
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
@@ -70,7 +68,6 @@ export class FavoritosController {
   }
 
   @Delete('/:id')
-  @ApiBody({ type: FavoritosBody })
   @ApiOperation({ summary: "Deleta um favorito pelo {ìd}"})
   @ApiResponse({ status: 200, type: Favoritos, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {

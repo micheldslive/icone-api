@@ -40,7 +40,6 @@ export class ProdutosController {
   }
 
   @Get()
-  @ApiBody({ type: ProdutosBody })
   @ApiOperation({ summary: "Retorna Todos os Produtos"})
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async fetchAll(@Res() response) {
@@ -55,7 +54,6 @@ export class ProdutosController {
   }
 
   @Get('/:id')
-  @ApiBody({ type: ProdutosBody })
   @ApiOperation({ summary: "Retorna produto pelo {ìd}"})
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
@@ -70,7 +68,6 @@ export class ProdutosController {
   }
 
   @Delete('/:id')
-  @ApiBody({ type: ProdutosBody })
   @ApiOperation({ summary: "Deleta produto pelo {ìd}"})
   @ApiResponse({ status: 200, type: Produtos, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {

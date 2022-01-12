@@ -68,7 +68,6 @@ export class CategoriasController {
   }
 
   @Delete('/:id')
-  @ApiBody({ type: CategoriasBody })
   @ApiOperation({ summary: "Deleta uma categoria pelo {ìd}"})
   @ApiResponse({ status: 200, type: Categorias, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {

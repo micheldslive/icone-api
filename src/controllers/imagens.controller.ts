@@ -40,7 +40,6 @@ export class ImagensController {
   }
 
   @Get()
-  @ApiBody({ type: ImagensBody })
   @ApiOperation({ summary: "Retorna todas as imagens"})
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async fetchAll(@Res() response) {
@@ -55,7 +54,6 @@ export class ImagensController {
   }
 
   @Get('/:id')
-  @ApiBody({ type: ImagensBody })
   @ApiOperation({ summary: "Retorna imagem pelo {ìd}"})
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
@@ -70,7 +68,6 @@ export class ImagensController {
   }
 
   @Delete('/:id')
-  @ApiBody({ type: ImagensBody })
   @ApiOperation({ summary: "Deleta imagem pelo {ìd}"})
   @ApiResponse({ status: 200, type: Imagens, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {

@@ -40,7 +40,6 @@ export class ClientesController {
   }
 
   @Get()
-  @ApiBody({ type: ClientesBody })
   @ApiOperation({ summary: "Retorna todos os clientes"})
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async fetchAll(@Res() response) {
@@ -55,7 +54,6 @@ export class ClientesController {
   }
 
   @Get('/:id')
-  @ApiBody({ type: ClientesBody })
   @ApiOperation({ summary: "Retorna um cliente pelo {ìd}"})
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async findById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
@@ -70,7 +68,6 @@ export class ClientesController {
   }
 
   @Delete('/:id')
-  @ApiBody({ type: ClientesBody })
   @ApiOperation({ summary: "Deleta um cliente pelo {ìd}"})
   @ApiResponse({ status: 200, type: Clientes, isArray: true })
   async deleteById(@Res() response, @Param('id', new ParseUUIDPipe()) id: string) {
